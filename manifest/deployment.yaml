@@ -18,7 +18,7 @@ spec:
         app: app
     spec:
       containers:
-      - image: ghcr.io/virtualtech-devops/github-ciops:894d24b
+      - image: ghcr.io/virtualtech-devops/github-ciops:0e90650
         name: github-ciops
         resources: {}
 status: {}
