@@ -56,4 +56,12 @@ minikube delete
 
 問題なければGitHubにPush
 
-##
+## GitHub Actionsの設定
+
+```
+gh
+```
+
+```
+eksctl create iamidentitymapping --cluster poc --arn arn:aws:iam::960052897027:role/GitHubOIDC-20230602001121811500000001 --group system:masters --username admin
+```
