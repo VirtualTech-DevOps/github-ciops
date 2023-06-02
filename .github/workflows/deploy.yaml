@@ -1,0 +1,30 @@
+name: deploy to eks
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'manifest/**'
+      - .github/workflows/deploy.yaml
+
+jobs:
+  deploy-to-eks:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Kubectl tool installer
+        uses: Azure/setup-kubectl@v3
+      - name: Configure AWS Credentials For GitHub Actions
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ vars.assume_role }}
+          aws-region: ${{ vars.aws_region }}
+      - name: Update KUBECONFIG
+        run: aws eks update-kubeconfig --name ${{ vars.cluster_name }}
+      - name: Deploy to EKS
+        run: kubectl apply -k manifest
