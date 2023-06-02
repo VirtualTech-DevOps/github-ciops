@@ -59,9 +59,19 @@ minikube delete
 ## GitHub Actionsの設定
 
 ```
-gh
+echo poc | gh variable set cluster_name
+```
+
+`terraform`ディレクトリ以下で実行
+
+```
+terraform output -raw role | gh variable set assume_role
 ```
 
 ```
-eksctl create iamidentitymapping --cluster poc --arn arn:aws:iam::960052897027:role/GitHubOIDC-20230602001121811500000001 --group system:masters --username admin
+terraform output -raw region | gh variable set aws_region
+```
+
+```
+eksctl create iamidentitymapping --cluster poc --arn $(terraform output -raw role) --group system:masters --username admin
 ```
