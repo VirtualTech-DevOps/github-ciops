@@ -1,4 +1,5 @@
-github-cli 2.30.0
 awscli 2.11.24
-kubectl 1.27.2
 eksctl 0.143.0
+github-cli 2.30.0
+kubectl 1.27.2
+terraform 1.4.6
